@@ -5,13 +5,44 @@ import imp
 from System.IO import File
 from os import path
 
+"""
+Run:
+  1. Open command prompt.
+  2. ipy -m unittest testParser.<ClassName>
+
+Example:
+  ipy -m unittest testParser.TestItem
+  ipy -m unittest testParser.TestParser
+
+Revision:
+  0.1 [2014.06.16] Add Parser, TestParser and TestItem.
+  0.2 [2014.06.17]
+  0.3 [2014.06.18]
+"""
+
 class TestItem(unittest.TestCase) :
   """
-  Test XML item.
+  class TestItem - Test XML item
+  - Item count.
+  - Extract property by name.
+  - Extract collection by name.
   """
   def setUp(self) :
     parser = Parser()
     self.items = parser.extract()
+
+  def testCollection(self) :
+    collections = self.items[0].Collections
+    d001 = collections["UW_D001"]
+    length = len(d001)
+    self.assertTrue(length > 0)
+
+  def testField(self) :
+    from Newtonsoft.Json import JsonConvert
+    item = self.items[0]
+    f1 = item.CLM_001D1
+    f2 = item.UW_D001D10
+    self.assertEqual(f2, "UW25570004074")
 
   def testItemCount(self) :
     length = len(self.items)
@@ -19,7 +50,10 @@ class TestItem(unittest.TestCase) :
 
 class TestParser(unittest.TestCase) :
   """
-  Test parser.
+  class TestParser - Test parser
+  - Load xml file.
+  - Load editor file.
+  - Instantiate extractor.
   """
   def setUp(self):
     self.parser = Parser()
@@ -135,6 +169,3 @@ class Parser() :
     parser.SetEditor(editor)
     result = parser.Extracts(xml)
     return result
-
-if __name__ == "__main__" :
-    unittest.main()
