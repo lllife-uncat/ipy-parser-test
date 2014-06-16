@@ -70,16 +70,25 @@ class Parser() :
     self.loadDLL()
 
   def appendPath(self) :
+    """
+    Append .net assemply path.
+    """
     # append .dll|.exe path.
     sys.path.append(self.applicationPath)
     sys.path.append(self.scriptPath)
 
   def loadDLL(self) :
+    """
+    Load all dependency dll|exe.
+    """
     # loadd dependency dll.
     clr.AddReference("Newtonsoft.Json.dll")
     clr.AddReference("Editor.exe")
 
   def getXml(self) :
+    """
+    Load xml from test file.
+    """
     from System.IO import File
     xml = File.ReadAllText(self.sampleFile)
     return xml
@@ -116,6 +125,10 @@ class Parser() :
     return editorObject
 
   def extract(self) :
+    """
+    Extract xml into item.
+    Each item contain properties and collections.
+    """
     xml = self.getXml()
     editor = self.getEditorObject()
     parser = self.getParser()()
