@@ -41,7 +41,7 @@ class TestItem(unittest.TestCase) :
         Test collection. """
 
         collections = self.items[0].Collections
-        d001 = collections["UW_D001"]
+        d001 = collections["C001"]
         length = len(d001)
         self.assertTrue(length > 0)
 
@@ -60,7 +60,7 @@ class TestItem(unittest.TestCase) :
         """
         Check number of items in xml. """
         length = len(self.items)
-        self.assertEqual(length, 1)
+        self.assertEqual(length, 211)
 
 class TestParser(unittest.TestCase) :
     """
