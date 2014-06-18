@@ -5,14 +5,15 @@ module.exports = function(grunt) {
             python: {
                 files: [
 					"**/**.py", "**/**.PY",
-					"E:\\runtime\\generator.env\\Template.OLI_Template\\Item.Script\\**.PY"
+					"E:/runtime/generator.env/Template.OLI_Template/Item.Script/**/**.PY",
+					"E:/runtime/generator.env/Template.OLI_Template/Item.Script/**/**.py",
 				],
                 tasks: ["shell"]
             }
         },
         shell: {
             runTest: {
-                command: "ipy -m unittest testParser.TestParser"
+                command: "ipy -m unittest testParser.TestItem"
             }
         },
 		pylint: {

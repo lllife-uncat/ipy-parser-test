@@ -52,9 +52,8 @@ class TestItem(unittest.TestCase) :
 
         from Newtonsoft.Json import JsonConvert
         item = self.items[0]
-        f1 = item.CLM_001D1
-        f2 = item.UW_D001D10
-        self.assertEqual(f2, "UW25570004074")
+        atts = [x for x in item.__dict__]
+        self.assertFalse(len(atts) == 0)
 
     @timed
     def testItemCount(self) :
@@ -136,8 +135,6 @@ class Parser() :
 
         self.editorFile = path.join(self.scriptPath, s.uuid + ".SCRIPT.PY.EDITOR")
         self.parserFile = path.join(self.scriptPath, s.uuid + ".SCRIPT.PY")
-        #self.sampleFile = path.join(self.scriptPath, s.uuid + ".TEST.XML")
-
 
         self.appendPath()
         self.loadDLL()
@@ -150,6 +147,7 @@ class Parser() :
         # append .dll|.exe path.
         sys.path.append(self.applicationPath)
         sys.path.append(self.scriptPath)
+
 
     @timed
     def loadDLL(self) :
@@ -210,8 +208,6 @@ class Parser() :
         Each item contain properties and collections. """
 
         xml = self.getXml()
-        editor = self.getEditorObject()
         parser = self.getParser()()
-        parser.SetEditor(editor)
         result = parser.Extracts(xml)
         return result
