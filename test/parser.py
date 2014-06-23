@@ -3,14 +3,15 @@ from test.wrapper import timed
 from os import path
 import sys
 import imp
+import System.IO
+from System.IO import File
 
 class Parser() :
     """
     class Parser - Parser xml file and extract item. """
 
     def __init__(self) :
-        """
-        Load dependency files. """
+        """ Load dependency files. """
 
         from configs import Setting
         s = Setting()
@@ -27,8 +28,7 @@ class Parser() :
 
     @timed
     def appendPath(self) :
-        """
-        Append .net assemply path. """
+        """ Append .net assemply path. """
 
         # append .dll|.exe path.
         sys.path.append(self.applicationPath)
@@ -37,8 +37,7 @@ class Parser() :
 
     @timed
     def loadDLL(self) :
-        """
-        Load all dependency dll|exe. """
+        """ Load all dependency dll|exe. """
 
         # loadd dependency dll.
         clr.AddReference("Newtonsoft.Json.dll")
@@ -46,8 +45,7 @@ class Parser() :
 
     @timed
     def getXml(self) :
-        """
-        Load xml from test file. """
+        """ Load xml from test file. """
 
         from System.IO import File
         xml = File.ReadAllText(self.sampleFile)
@@ -55,8 +53,7 @@ class Parser() :
 
     @timed
     def getEditorText(self) :
-        """
-        Load parser text from file.
+        """ Load parser text from file.
         File format: <\d{32}>.SCRIPT.PY.EDITOR
         Location: <Template Path>/Item.Script """
 
@@ -65,8 +62,7 @@ class Parser() :
 
     @timed
     def getParser(self) :
-        """
-        Load parser from file.
+        """ Load parser from file.
         File format: <\d{32}>.SCRIPT.PY
         Location: <Template Path>/Item.Script """
 
@@ -75,8 +71,7 @@ class Parser() :
 
     @timed
     def getEditorObject(self) :
-        """
-        Create object from editor text (json string).
+        """ Create object from editor text (json string).
         Use JsonConvert to deserialize json into PropertyEditor. """
 
         from Newtonsoft.Json import JsonConvert
@@ -89,8 +84,7 @@ class Parser() :
 
     @timed
     def extract(self) :
-        """
-        Extract xml into item.
+        """ Extract xml into item.
         Each item contain properties and collections. """
 
         xml = self.getXml()

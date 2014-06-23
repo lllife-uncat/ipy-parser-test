@@ -12,7 +12,6 @@ Revision:
     0.2 [2014.06.17]
     0.3 [2014.06.18]   """
 
-
 import unittest
 import imp
 from System.IO import File
@@ -20,8 +19,7 @@ from test.wrapper import timed
 from test.parser import Parser
 
 class TestItem(unittest.TestCase) :
-    """
-    class TestItem - Test XML item
+    """ class TestItem - Test XML item
     - Item count.
     - Extract property by name.
     - Extract collection by name. """
@@ -36,8 +34,7 @@ class TestItem(unittest.TestCase) :
 
     @timed
     def testCollection(self) :
-        """
-        Test collection. """
+        """ Test collection. """
 
         collections = self.items[0].Collections
         d001 = collections["C001"]
@@ -46,8 +43,7 @@ class TestItem(unittest.TestCase) :
 
     @timed
     def testField(self) :
-        """
-        Check specific field value. """
+        """ Check specific field value. """
 
         from Newtonsoft.Json import JsonConvert
         item = self.items[0]
@@ -56,7 +52,6 @@ class TestItem(unittest.TestCase) :
 
     @timed
     def testItemCount(self) :
-        """
-        Check number of items in xml. """
+        """ Check number of items in xml. """
         length = len(self.items)
         self.assertEqual(length, 211)
